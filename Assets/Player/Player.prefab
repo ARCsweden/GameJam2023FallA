@@ -354,6 +354,9 @@ MonoBehaviour:
   lookDeadzone: 0.3
   speed: 0
   turtle: {fileID: 4633605223425576665, guid: 3fac2658b76d54037ba8915a7a0b64c2, type: 3}
+  grenade: {fileID: 6169067618350063171, guid: 1630a94560fb0244da0749e57a7fa040, type: 3}
+  impulsez: 2
+  impulsey: 4
   DirTransform: {fileID: 3004345511956544875}
   InputDirection: {x: 0, y: 0, z: 0}
 --- !u!33 &5166416595220037381
