@@ -8,7 +8,7 @@ public class TurtleBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        transform.Translate(Vector3.forward);
     }
 
     // Update is called once per frame
@@ -16,5 +16,9 @@ public class TurtleBehaviour : MonoBehaviour
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
         //transform.position = new Vector3(0,0,2) * Time.deltaTime;
+    }
+
+    void OnCollisionEnter(){
+        Destroy(gameObject);
     }
 }

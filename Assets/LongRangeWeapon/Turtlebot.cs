@@ -19,10 +19,14 @@ public class Turtlebot : MonoBehaviour
     void Update()
     {
         var keyboard = Keyboard.current;
-        if( keyboard.spaceKey.wasPressedThisFrame )
+        /*if( keyboard.spaceKey.wasPressedThisFrame )
 	        Debug.Log("NEW INPUT SYSTEM, space key pressed");
         if(keyboard.spaceKey.wasPressedThisFrame){
             Instantiate(turtlebot);
-        }
+        }*/
     }
+
+    //void OnShoot(){
+     //   Instantiate(turtlebot);
+    //}
 }
