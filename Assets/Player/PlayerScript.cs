@@ -16,6 +16,12 @@ public class PlayerScript : MonoBehaviour
     public float lookDeadzone = 0.3f;
     public float speed = 0;
     public GameObject turtle;
+    public GameObject grenade;
+    Rigidbody grenade_Rigidbody;
+    public float impulsez = 2;
+    public float impulsey = 4;
+    //public Vector3 offset = new Vector3(1.0f,0.0f,0.0f);
+
     // Start is called before the first frame update
     public void TakeDamage()
     {
@@ -103,6 +109,7 @@ public class PlayerScript : MonoBehaviour
     {
         //Debug.Log("mInput: "+ mInput);
 
+
         if (mInput.Get<Vector2>().x < -moveDeadzone || mInput.Get<Vector2>().x > moveDeadzone)
         {
             moveInput.x = mInput.Get<Vector2>().x;
@@ -156,6 +163,15 @@ public class PlayerScript : MonoBehaviour
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         transform.position = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
     }
+    
+    void OnThrow()
+    {
+        GameObject g = Instantiate(grenade, transform.position+transform.forward , transform.rotation) ;
+        g.GetComponent<Rigidbody>().AddForce(0, impulsey, impulsez, ForceMode.Impulse);
+        UnityEngine.Debug.Log("NEW INPUT SYSTEM, g key pressed");
+        Destroy(g, 5.0f);
+    }
+
 }
 
 
