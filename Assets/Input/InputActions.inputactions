@@ -6,6 +6,15 @@
             "id": "a4cb4eac-738c-4b8e-b55a-5716a9b1f181",
             "actions": [
                 {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "147b57fa-0533-4161-a20c-0637fa300841",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "b4f9dbc4-c72c-4616-8954-32ad8c91e2ce",
