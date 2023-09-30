@@ -7,9 +7,22 @@ using UnityEngine.UIElements;
 
 public class PlayerScript : MonoBehaviour
 {
+    public PlayerManager playerManager;
+    public float health, maxHealth;
+    public HealthBar healthBar;
+    public int playerIndex;
     public float moveForce;
     public float moveDeadzone = 0.3f;
     public float lookDeadzone = 0.3f;
+    public float speed = 0;
+    public GameObject turtle;
+    // Start is called before the first frame update
+    public void TakeDamage()
+    {
+        // Use your own damage handling code, or this example one.    
+        health -= 10f;
+        healthBar.UpdateHealthBar();
+    }
 
 
     [SerializeField]
@@ -26,12 +39,22 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         mainCamera = FindAnyObjectByType<Camera>();
+        playerManager = FindObjectOfType<PlayerManager>();
+        maxHealth = 100;
+        health = maxHealth;
+        healthBar.UpdateHealthBar();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(health <= 0){
+            health = maxHealth;
+            healthBar.UpdateHealthBar();
+            resetPlayer();
+            playerManager.removeScore(20, playerIndex);
+
+        }
     }
 
     // Update is called once per physics tick
@@ -121,4 +144,22 @@ public class PlayerScript : MonoBehaviour
             moveInput.y = 0;
         }
     }
+    void OnShoot(){
+        GameObject g=Instantiate(turtle, transform.position, transform.rotation);
+        UnityEngine.Debug.Log("NEW INPUT SYSTEM, space key pressed");
+    }
+    void OnCollisionEnter(){
+        TakeDamage();
+    }
+    private void resetPlayer()
+    {
+        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        transform.position = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+    }
 }
+
+
+
+
+
+ 
