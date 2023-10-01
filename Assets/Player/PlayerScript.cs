@@ -59,7 +59,6 @@ public class PlayerScript : MonoBehaviour
             healthBar.UpdateHealthBar();
             resetPlayer();
             playerManager.removeScore(20, playerIndex);
-
         }
     }
 
@@ -70,10 +69,21 @@ public class PlayerScript : MonoBehaviour
         camTransform = camTransform.normalized;
         DirTransform.forward = camTransform;
 
-        //FixRotation();
-        UpdateLook();
-        UpdateMovement();
-        //Debug.Log("moveInput: " + moveInput);
+
+        if (health <= 0)
+        {
+            health = maxHealth;
+            healthBar.UpdateHealthBar();
+            resetPlayer();
+            playerManager.removeScore(20, playerIndex);
+        }
+        else
+        {
+            UpdateLook();
+            UpdateMovement();
+            //Debug.Log("moveInput: " + moveInput);
+        }
+
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -91,10 +101,6 @@ public class PlayerScript : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().AddForce(-DirTransform.forward * moveForce * moveInput.x + DirTransform.right * moveForce * moveInput.y, ForceMode.Impulse);
     }
 
-    private void FixRotation()
-    {
-        transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y, 0));
-    }
 
     // ------------------------------------------------------------------------------------------------
     // Input System Functions:
@@ -102,7 +108,7 @@ public class PlayerScript : MonoBehaviour
     void OnJump()
     {
         //Debug.Log("Jump!");
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,5,0), ForceMode.Impulse);
+        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,500,0), ForceMode.Impulse);
     }
 
     void OnMove(InputValue mInput)
@@ -161,7 +167,9 @@ public class PlayerScript : MonoBehaviour
     private void resetPlayer()
     {
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-        transform.position = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+        gameObject.transform.position = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+        gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+        gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
     }
     
     void OnThrow()
