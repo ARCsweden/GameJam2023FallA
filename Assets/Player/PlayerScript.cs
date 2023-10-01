@@ -20,13 +20,15 @@ public class PlayerScript : MonoBehaviour
     Rigidbody grenade_Rigidbody;
     public float impulsez = 2;
     public float impulsey = 4;
+
+    public Color playerColor;
     //public Vector3 offset = new Vector3(1.0f,0.0f,0.0f);
 
     // Start is called before the first frame update
     public void TakeDamage()
     {
         // Use your own damage handling code, or this example one.    
-        health -= 10f;
+        health -= 60f;
         healthBar.UpdateHealthBar();
     }
 
@@ -54,12 +56,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(health <= 0){
-            health = maxHealth;
-            healthBar.UpdateHealthBar();
-            resetPlayer();
-            playerManager.removeScore(20, playerIndex);
-        }
+        
     }
 
     // Update is called once per physics tick
@@ -164,12 +161,16 @@ public class PlayerScript : MonoBehaviour
     void OnCollisionEnter(){
         TakeDamage();
     }
-    private void resetPlayer()
+    void resetPlayer()
     {
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         gameObject.transform.position = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
-        gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        gameObject.GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0);
+        gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+    public void UpdateColor(Color color){
+        playerColor = color;
+        playerManager.colorArray[playerIndex] = playerColor;
     }
     
     void OnThrow()

@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 1254960141498284902}
   - component: {fileID: 3087585707143096552}
   - component: {fileID: 4784306874252237473}
+  - component: {fileID: 8139006066850046271}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -358,6 +359,7 @@ MonoBehaviour:
   grenade: {fileID: 6169067618350063171, guid: 1630a94560fb0244da0749e57a7fa040, type: 3}
   impulsez: 2
   impulsey: 4
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
   DirTransform: {fileID: 3004345511956544875}
   InputDirection: {x: 0, y: 0, z: 0}
 --- !u!33 &5166416595220037381
@@ -491,6 +493,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player_ActionMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8139006066850046271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838113257140860114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b16ad58c3c14769b546f19679b5032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8343692269597841082
 GameObject:
   m_ObjectHideFlags: 0
