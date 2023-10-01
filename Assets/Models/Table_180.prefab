@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Table_180
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 14befa0b60bf7234eb5baa4c850002a8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Prop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

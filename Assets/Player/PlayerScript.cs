@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject grenade;
     Rigidbody grenade_Rigidbody;
     public float impulsez = 2;
-    public float impulsey = 4;
+    public float impulsey = 10;
 
     public Color playerColor;
     //public Vector3 offset = new Vector3(1.0f,0.0f,0.0f);
@@ -28,7 +28,7 @@ public class PlayerScript : MonoBehaviour
     public void TakeDamage()
     {
         // Use your own damage handling code, or this example one.    
-        health -= 60f;
+        health -= 10f;
         healthBar.UpdateHealthBar();
     }
 
@@ -88,7 +88,8 @@ public class PlayerScript : MonoBehaviour
     // ------------------------------------------------------------------------------------------------
     private void UpdateLook()
     {
-        transform.forward = DirTransform.right* lookInput.x + DirTransform.forward* lookInput.y;
+        if(lookInput.x != 0 || lookInput.y != 0)
+            transform.forward = DirTransform.right* lookInput.x + DirTransform.forward* lookInput.y;
     }
 
     private void UpdateMovement()
@@ -158,13 +159,22 @@ public class PlayerScript : MonoBehaviour
         GameObject g=Instantiate(turtle, transform.position, transform.rotation);
         UnityEngine.Debug.Log("NEW INPUT SYSTEM, space key pressed");
     }
-    void OnCollisionEnter(){
-        TakeDamage();
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Grenade"))
+        {
+            Debug.Log("Damage");
+            TakeDamage();
+        }
+        else
+        {
+            Debug.Log(collision.gameObject.tag);
+        }
     }
     void resetPlayer()
     {
         gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-        gameObject.transform.position = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
+        gameObject.transform.position = new Vector3(Random.Range(0, 5), 0, Random.Range(0, 5));
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
@@ -175,8 +185,8 @@ public class PlayerScript : MonoBehaviour
     
     void OnThrow()
     {
-        GameObject g = Instantiate(grenade, transform.position+transform.forward , transform.rotation) ;
-        g.GetComponent<Rigidbody>().AddForce(0, impulsey, impulsez, ForceMode.Impulse);
+        GameObject g = Instantiate(grenade, transform.position+transform.right, transform.rotation) ;
+        g.GetComponent<Rigidbody>().AddForce(impulsey*gameObject.transform.right, ForceMode.Impulse);
         UnityEngine.Debug.Log("NEW INPUT SYSTEM, g key pressed");
         Destroy(g, 5.0f);
     }

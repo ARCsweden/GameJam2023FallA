@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Oscilloscope
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f820903c686bf148b27fee4d47c0e9c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Prop
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

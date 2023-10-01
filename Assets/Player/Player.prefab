@@ -301,11 +301,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8502086903409924186}
-  - component: {fileID: 1733002434053760585}
   - component: {fileID: 5166416595220037381}
   - component: {fileID: 2445833421309454821}
   - component: {fileID: 1254960141498284902}
   - component: {fileID: 3087585707143096552}
+  - component: {fileID: 1733002434053760585}
   - component: {fileID: 4784306874252237473}
   - component: {fileID: 8139006066850046271}
   m_Layer: 0
@@ -334,34 +334,6 @@ Transform:
   - {fileID: 5157018327968283614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1733002434053760585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7838113257140860114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d6f8446a26ba8149b3078d623d5f15e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerManager: {fileID: 0}
-  health: 0
-  maxHealth: 0
-  healthBar: {fileID: 7887477354562368041}
-  playerIndex: 0
-  moveForce: 100
-  moveDeadzone: 0.2
-  lookDeadzone: 0.2
-  speed: 0
-  turtle: {fileID: 4633605223425576665, guid: 3fac2658b76d54037ba8915a7a0b64c2, type: 3}
-  grenade: {fileID: 6169067618350063171, guid: 1630a94560fb0244da0749e57a7fa040, type: 3}
-  impulsez: 2
-  impulsey: 4
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
-  DirTransform: {fileID: 3004345511956544875}
-  InputDirection: {x: 0, y: 0, z: 0}
 --- !u!33 &5166416595220037381
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -444,7 +416,7 @@ Rigidbody:
   m_GameObject: {fileID: 7838113257140860114}
   serializedVersion: 4
   m_Mass: 75
-  m_Drag: 10
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -462,6 +434,34 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 80
   m_CollisionDetection: 2
+--- !u!114 &1733002434053760585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838113257140860114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6f8446a26ba8149b3078d623d5f15e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
+  health: 0
+  maxHealth: 0
+  healthBar: {fileID: 7887477354562368041}
+  playerIndex: 0
+  moveForce: 25
+  moveDeadzone: 0.2
+  lookDeadzone: 0.2
+  speed: 0
+  turtle: {fileID: 4633605223425576665, guid: 3fac2658b76d54037ba8915a7a0b64c2, type: 3}
+  grenade: {fileID: 6169067618350063171, guid: 1630a94560fb0244da0749e57a7fa040, type: 3}
+  impulsez: 2
+  impulsey: 100
+  playerColor: {r: 0, g: 0, b: 0, a: 0}
+  DirTransform: {fileID: 3004345511956544875}
+  InputDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &4784306874252237473
 MonoBehaviour:
   m_ObjectHideFlags: 0
