@@ -20,6 +20,13 @@ public class PlayerScript : MonoBehaviour
     Rigidbody grenade_Rigidbody;
     public float impulsez = 2;
     public float impulsey = 10;
+    public AudioSource audioSource;
+    public AudioClip audioDamage;
+    private bool playerIsGrounded = false;
+
+    private float delayThrow = 0;
+    private float delayJump = 0;
+
 
     public Color playerColor;
     //public Vector3 offset = new Vector3(1.0f,0.0f,0.0f);
@@ -30,6 +37,7 @@ public class PlayerScript : MonoBehaviour
         // Use your own damage handling code, or this example one.    
         health -= 10f;
         healthBar.UpdateHealthBar();
+        audioSource.PlayOneShot(audioDamage, 0.5f);
     }
 
 
@@ -80,7 +88,8 @@ public class PlayerScript : MonoBehaviour
             UpdateMovement();
             //Debug.Log("moveInput: " + moveInput);
         }
-
+        delayThrow += Time.deltaTime;
+        delayJump += Time.deltaTime;
     }
 
     // ------------------------------------------------------------------------------------------------
@@ -105,8 +114,11 @@ public class PlayerScript : MonoBehaviour
     // ------------------------------------------------------------------------------------------------
     void OnJump()
     {
-        //Debug.Log("Jump!");
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,500,0), ForceMode.Impulse);
+        if (delayJump > 1)
+        {
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0), ForceMode.Impulse);
+            delayJump = 0;
+        }
     }
 
     void OnMove(InputValue mInput)
@@ -163,18 +175,19 @@ public class PlayerScript : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Grenade"))
         {
-            Debug.Log("Damage");
             TakeDamage();
         }
-        else
-        {
-            Debug.Log(collision.gameObject.tag);
-        }
     }
+
+    void OnReset()
+    {
+        health = 0;
+    }
+
     void resetPlayer()
     {
-        gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
-        gameObject.transform.position = new Vector3(Random.Range(0, 5), 0, Random.Range(0, 5));
+        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.transform.position = new Vector3(Random.Range(0, 5), 1, Random.Range(0, 5));
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
@@ -185,10 +198,14 @@ public class PlayerScript : MonoBehaviour
     
     void OnThrow()
     {
-        GameObject g = Instantiate(grenade, transform.position+transform.right, transform.rotation) ;
-        g.GetComponent<Rigidbody>().AddForce(impulsey*gameObject.transform.right, ForceMode.Impulse);
-        UnityEngine.Debug.Log("NEW INPUT SYSTEM, g key pressed");
-        Destroy(g, 5.0f);
+        if(delayThrow > 2)
+        {
+            GameObject g = Instantiate(grenade, transform.position + transform.right, transform.rotation);
+            g.GetComponent<Rigidbody>().AddForce(impulsey * gameObject.transform.right, ForceMode.Impulse);
+            UnityEngine.Debug.Log("NEW INPUT SYSTEM, g key pressed");
+            Destroy(g, 5.0f);
+            delayThrow = 0;
+        }
     }
 
 }
